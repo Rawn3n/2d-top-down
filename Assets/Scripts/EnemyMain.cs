@@ -2,9 +2,9 @@ using UnityEngine;
 
 public abstract class EnemyMain : MonoBehaviour
 {
-    public int damage = 10;
-    public int health = 100;
-    public float speed = 5.0f;
+    public int damage;
+    public int health;
+    public float speed;
 
 
     void Start()
