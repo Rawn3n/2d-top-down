@@ -7,14 +7,17 @@ public abstract class EnemyMain : MonoBehaviour
     public float speed;
 
 
-    void Start()
+    public abstract void Attack();
+    protected void TakeDamage(int damageAmount)
     {
-        
+        health -= damageAmount;
+        if (health <= 0)
+        {
+            Die();
+        }
     }
-
-    // Update is called once per frame
-    void Update()
+    protected virtual void Die()
     {
-        
+        Destroy(gameObject);
     }
 }

@@ -26,4 +26,9 @@ public class EnemySpeed : EnemyMain
             );
         }
     }
+
+    public void Attack()
+    {
+        
+    }
 }
