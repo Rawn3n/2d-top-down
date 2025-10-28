@@ -2,13 +2,13 @@ using UnityEngine;
 
 public abstract class EnemyMain : MonoBehaviour
 {
-    public int damage;
-    public int health;
+    public float damage;
+    public float health;
     public float speed;
 
 
     public abstract void Attack();
-    protected void TakeDamage(int damageAmount)
+    public void TakeDamage(float damageAmount)
     {
         health -= damageAmount;
         if (health <= 0)

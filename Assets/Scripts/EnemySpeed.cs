@@ -27,7 +27,7 @@ public class EnemySpeed : EnemyMain
         }
     }
 
-    public void Attack()
+    public override void Attack()
     {
         
     }

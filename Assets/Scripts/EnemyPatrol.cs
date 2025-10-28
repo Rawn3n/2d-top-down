@@ -40,6 +40,9 @@ public class EnemyPatrol : EnemyMain
         }
     }
 
+    public override void Attack()
+    {
 
+    }
 
 }
