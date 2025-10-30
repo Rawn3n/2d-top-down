@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public int startHealth = 100;
-    private int currentHealth;
+    public float startHealth = 100;
+    private float currentHealth;
 
     private void Start()
     {
         currentHealth = startHealth;
     }
-    void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
     }
 
-    void HealHealth(int healAmount)
+    public void HealHealth(float healAmount)
     { 
         currentHealth += healAmount;
         if (currentHealth > startHealth)
@@ -23,11 +23,18 @@ public class Health : MonoBehaviour
         }
     }
 
+    void Death()
+    {
+        Debug.Log("Dead");
+    }
+
     private void Update()
     {
         if (currentHealth <= 0)
         {
-            //
+            // load scene death screen
+            Death();
+            currentHealth = 100;
         }
     }
 }

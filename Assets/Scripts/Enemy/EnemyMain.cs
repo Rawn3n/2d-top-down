@@ -19,5 +19,6 @@ public abstract class EnemyMain : MonoBehaviour
     protected virtual void Die()
     {
         Destroy(gameObject);
+        Debug.Log("Enemy died");
     }
 }

@@ -1,9 +1,11 @@
+using UnityEditor.UI;
 using UnityEngine;
 
 public class EnemySpeed : EnemyMain
 {
     public Transform target;
     public float viewRange = 20f;
+    private float damageRange = 0.3f;
 
     private void FixedUpdate()
     {
@@ -25,10 +27,25 @@ public class EnemySpeed : EnemyMain
                 speed * Time.fixedDeltaTime
             );
         }
+
+        Attack();
     }
 
     public override void Attack()
     {
-        
+        //explosion or melee
+        if (damageRange >= Vector2.Distance(transform.position, target.position))
+        {
+            target.GetComponent<Health>()?.TakeDamage(damage);
+            Die();
+        }
     }
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.collider.CompareTag("Player"))
+    //    {
+    //        target.GetComponent<Health>()?.TakeDamage(damage);
+    //    }
+    //}
 }

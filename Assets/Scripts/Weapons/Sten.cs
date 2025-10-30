@@ -18,13 +18,13 @@ public class Sten : WeaponThrowing
         isFired = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Enemy"))
-        {
-            collision.collider.GetComponent<EnemyMain>()?.TakeDamage(damage);
-            Destroy(gameObject);
-        }
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.collider.CompareTag("Enemy"))
+    //    {
+    //        collision.collider.GetComponent<EnemyMain>()?.TakeDamage(damage);
+    //        Destroy(gameObject);
+    //    }
+    //}
 
 }
