@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 130119522}
   - component: {fileID: 130119524}
   - component: {fileID: 130119523}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2275,6 +2275,26 @@ PrefabInstance:
     m_TransformParent: {fileID: 895878498}
     m_Modifications:
     - target: {fileID: 1959543505809925599, guid: 00ab316791414f545b88f988e44240dd, type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959543505809925599, guid: 00ab316791414f545b88f988e44240dd, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 130119520}
+    - target: {fileID: 1959543505809925599, guid: 00ab316791414f545b88f988e44240dd, type: 3}
+      propertyPath: viewRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959543505809925599, guid: 00ab316791414f545b88f988e44240dd, type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959543505809925599, guid: 00ab316791414f545b88f988e44240dd, type: 3}
+      propertyPath: chaseSpeedMultiplier
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959543505809925599, guid: 00ab316791414f545b88f988e44240dd, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 7
       objectReference: {fileID: 0}
@@ -2366,18 +2386,6 @@ PrefabInstance:
     - target: {fileID: 3148322925127523946, guid: 9aa19f54a678213458bdbcc03cc95a87, type: 3}
       propertyPath: m_Name
       value: EnemyAI
-      objectReference: {fileID: 0}
-    - target: {fileID: 4798561543791701754, guid: 9aa19f54a678213458bdbcc03cc95a87, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4798561543791701754, guid: 9aa19f54a678213458bdbcc03cc95a87, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4798561543791701754, guid: 9aa19f54a678213458bdbcc03cc95a87, type: 3}
-      propertyPath: m_Color.r
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5062397701219705928, guid: 9aa19f54a678213458bdbcc03cc95a87, type: 3}
       propertyPath: target
