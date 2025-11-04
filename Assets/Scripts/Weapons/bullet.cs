@@ -2,15 +2,13 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+[SerializeField] private float damage = 10.0f;
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
-    }
+        if (collision.collider.CompareTag("Enemy"))
+        {
+            collision.collider.GetComponent<EnemyMain>()?.TakeDamage(damage);
+        }
+    }   
 }
