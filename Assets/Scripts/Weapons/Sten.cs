@@ -1,45 +1,46 @@
-using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class Sten : WeaponThrowing
 {
     public GameObject bulletPrefab;
     private bool isFired = false;
+    [SerializeField] private float fireRate = 1.5f;
 
-
-
-
-    private void FixedUpdate()
+    private void Update()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame) //(Input.GetKey(KeyCode.Space)) //(Input.GetKeyDown(KeyCode.Space))
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             Shoot(shootPoint);
         }
     }
 
-    public override void Shoot (Transform shootPoint)
+    public override void Shoot(Transform shootPoint)
     {
-        if (isFired)
-        {
-            return;
-        }
+        if (isFired) return;
 
-        GameObject bullet = Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.linearVelocity = shootPoint.forward * bulletSpeed;
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+        mousePos.z = 0f; 
+
+        Vector2 direction = (mousePos - shootPoint.position).normalized;
+
+        Vector3 spawnPos = shootPoint.position + (Vector3)(direction * 0.5f);
+        GameObject bullet = Instantiate(bulletPrefab, spawnPos, Quaternion.identity);
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        bullet.transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
+
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.linearVelocity = direction * bulletSpeed;
+
         isFired = true;
+        Invoke(nameof(ResetFire), fireRate);
     }
 
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    if (collision.collider.CompareTag("Enemy"))
-    //    {
-    //        collision.collider.GetComponent<EnemyMain>()?.TakeDamage(damage);
-    //        Destroy(gameObject);
-    //    }
-    //}
 
+    private void ResetFire()
+    {
+        isFired = false;
+    }
 }

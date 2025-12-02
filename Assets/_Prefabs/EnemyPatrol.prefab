@@ -140,6 +140,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  target: {fileID: 0}
+  viewRange: 6
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  chaseSpeedMultiplier: 1.5
+  currentState: 0
 --- !u!61 &8116287833124029030
 BoxCollider2D:
   m_ObjectHideFlags: 0

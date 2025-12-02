@@ -1303,6 +1303,10 @@ PrefabInstance:
       propertyPath: 'patrolPoints.Array.data[6]'
       value: 
       objectReference: {fileID: 998122815}
+    - target: {fileID: 4623546688331065944, guid: 00ab316791414f545b88f988e44240dd, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5165378324921742225, guid: 00ab316791414f545b88f988e44240dd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -19.49
@@ -1808,6 +1812,7 @@ GameObject:
   - component: {fileID: 2123462113}
   - component: {fileID: 2123462112}
   - component: {fileID: 2123462116}
+  - component: {fileID: 2123462117}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -1856,7 +1861,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &2123462113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1988,6 +1993,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Sten
   shootPoint: {fileID: 200480695}
   bulletPrefab: {fileID: 8320231537342652363, guid: 36cdc4153a8644748980928c237caf1f, type: 3}
+--- !u!114 &2123462117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123462110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db7190a2085a684b9738e29ca1c0a56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCtrl
 --- !u!1 &2140849071
 GameObject:
   m_ObjectHideFlags: 0
