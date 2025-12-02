@@ -1,19 +1,40 @@
-using NUnit.Framework.Constraints;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class EnemyAI : EnemyMain
 {
-    public float damageRange = 5f;
-    public GameObject bulletPrefab;
-    public override void Attack()
+    [Header("Combat Settings")]
+    public float damageRange = 2f;
+    public float attackCooldown = 1f;
+
+    private Transform player;
+    private float lastAttackTime = 0f;
+
+    void Start()
     {
-        if (damageRange >= Vector2.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position)) 
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        if (playerObj != null)
+            player = playerObj.transform;
+    }
+
+    private void FixedUpdate()
+    {
+        Attack();
+    }
+
+public override void Attack()
+    {
+        if (player == null) return;
+
+        float distance = Vector2.Distance(transform.position, player.position);
+
+        if (distance <= damageRange && Time.time >= lastAttackTime + attackCooldown)
         {
-            //GameObject bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-            //Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            //rb.linearVelocity = transform.forward * 5f; //bulletSpeed;
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Health>()?.TakeDamage(damage);
+            Health playerHealth = player.GetComponent<Health>();
+            if (playerHealth != null)
+                playerHealth.TakeDamage(damage);
+
+            lastAttackTime = Time.time;
         }
     }
 }
+

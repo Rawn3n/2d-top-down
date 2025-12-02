@@ -2,10 +2,10 @@ using UnityEngine;
 
 public abstract class WeaponThrowing : WeaponMain
 {
-    protected float bulletSpeed = 20.0f;
+    [Header("Throwing Weapon Settings")]
+    [SerializeField] protected float bulletSpeed = 20f;
 
     public Transform shootPoint;
 
-    public abstract void Shoot(Transform shootPoint);
 }
 

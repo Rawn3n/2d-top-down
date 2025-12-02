@@ -8,10 +8,19 @@ public class EnemyPatrol : EnemyMain
     public List<Transform> patrolPoints = new List<Transform>();
     private int currentPointIndex = 0;
 
+    [Header("Ranged Attack Settings")]
+    public GameObject bulletPrefab;
+    public Transform firePoint;
+    public float shootCooldown = 1f;
+    public float bulletSpeed = 8f;
+    public float attackRange = 5f;
+
+    private float nextShootTime = 0f;
+
     [Header("Detection Settings")]
     public Transform target;
     public float viewRange = 6f;
-    public LayerMask playerLayer;       // Only detect the player
+    public LayerMask playerLayer;
     public float chaseSpeedMultiplier = 1.5f;
 
     private float stoppingDistance = 0.5f;
@@ -31,7 +40,7 @@ public class EnemyPatrol : EnemyMain
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = 0; // top-down or side view
+        rb.gravityScale = 0;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
         if (target == null)
@@ -125,25 +134,69 @@ public class EnemyPatrol : EnemyMain
         rb.linearVelocity = direction.normalized * speed * chaseSpeedMultiplier;
 
         float dist = Vector2.Distance(transform.position, target.position);
-        if (dist < 1.0f)
+        if (dist < attackRange)
         {
             rb.linearVelocity = Vector2.zero;
-            Debug.Log("Close enough to attack!");
+            //Debug.Log("Close enough to attack!");
             currentState = State.Attacking;
         }
     }
 
     public override void Attack()
     {
-        Debug.Log("Enemy attacking!");
+
         rb.linearVelocity = Vector2.zero;
+
+        if (Time.time < nextShootTime)
+            return;
+
+        if (bulletPrefab == null)
+        {
+            return;
+        }
+
+        if (firePoint == null)
+        {
+            return;
+        }
+
+        if (target == null)
+        {
+            currentState = State.Patrolling;
+            return;
+        }
+        //Debug.Log("Enemy attempts to shoot!");
+
+        Vector2 direction = (target.position - firePoint.position).normalized;
+
+        GameObject b = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        //Debug.Log("Bullet spawned: " + b);
+
+        bullet bulletScript = b.GetComponent<bullet>();
+        if (bulletScript != null)
+        {
+            bulletScript.isEnemyBullet = true;
+            bulletScript.isPlayerBullet = false;
+            bulletScript.ignoreLayers = LayerMask.GetMask("Enemy");
+
+            bulletScript.SetDamage(damage);
+        }
+
+        Rigidbody2D brb = b.GetComponent<Rigidbody2D>();
+        if (brb != null)
+        {
+            brb.linearVelocity = direction * bulletSpeed;
+        }
+
+        nextShootTime = Time.time + shootCooldown;
+        currentState = State.Chasing;
     }
 
     protected override void Die()
     {
-        Debug.Log("Enemy dying...");
+        //Debug.Log("Enemy dying...");
         rb.linearVelocity = Vector2.zero;
         currentState = State.Dead;
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, 0f);
     }
 }

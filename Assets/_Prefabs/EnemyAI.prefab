@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8720088344627824767}
   - component: {fileID: 5062397701219705928}
   - component: {fileID: -759510728107710802}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyAI
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -239,6 +239,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
   damage: 10
   health: 50
-  speed: 2
-  damageRange: 5
-  bulletPrefab: {fileID: 0}
+  speed: 0
+  damageRange: 2
+  attackCooldown: 1
