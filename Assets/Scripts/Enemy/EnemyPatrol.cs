@@ -51,7 +51,6 @@ public class EnemyPatrol : EnemyMain
                 Patrol();
                 if (LookForPlayer())
                 {
-                    Debug.Log("▶ Player detected! Switching to CHASING");
                     currentState = State.Chasing;
                 }
                 break;
@@ -63,7 +62,6 @@ public class EnemyPatrol : EnemyMain
                 }
                 else
                 {
-                    Debug.Log("✖ Lost player, back to PATROL");
                     currentState = State.Patrolling;
                 }
                 break;
@@ -130,7 +128,7 @@ public class EnemyPatrol : EnemyMain
         if (dist < 1.0f)
         {
             rb.linearVelocity = Vector2.zero;
-            Debug.Log("💥 Close enough to attack!");
+            Debug.Log("Close enough to attack!");
             currentState = State.Attacking;
         }
     }

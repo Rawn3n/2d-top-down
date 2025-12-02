@@ -5,19 +5,20 @@ public class EnemySpeed : EnemyMain
 {
     public Transform target;
     public float viewRange = 20f;
-    private float damageRange = 0.3f;
+    private float damageRange = 1f;
+    private float offset = 0.7f;
 
     private void FixedUpdate()
     {
         if (target == null)
-        {
             return;
-        }
 
         Vector2 direction = target.position - transform.position;
-        Debug.DrawLine(transform.position, target.position, Color.blue);
+        Vector2 rayOrigin = (Vector2)transform.position + direction.normalized * offset;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction.normalized, viewRange);
+        Debug.DrawLine(rayOrigin, target.position, Color.blue);
+
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, direction.normalized, viewRange);
 
         if (hit.collider != null && hit.collider.transform == target)
         {

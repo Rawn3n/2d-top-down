@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class Health : MonoBehaviour
     void Death()
     {
         Debug.Log("Dead");
+        SceneManager.LoadScene("Mads");
     }
 
     private void Update()
@@ -34,7 +36,6 @@ public class Health : MonoBehaviour
         {
             // load scene death screen
             Death();
-            currentHealth = 100;
         }
     }
 }

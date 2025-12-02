@@ -9,7 +9,7 @@ public class Sten : WeaponThrowing
 
     private void Update()
     {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (Mouse.current.leftButton.wasPressedThisFrame)//(Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             Shoot(shootPoint);
         }
