@@ -792,7 +792,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -882,10 +882,22 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 1674326900360183764, guid: 7ab1d6a71bdfd1e4dba38846405e0e10, type: 3}
   - {fileID: 3148322925127523946, guid: 9aa19f54a678213458bdbcc03cc95a87, type: 3}
-  spawnInterval: 3
-  spawnAreaMin: {x: -22, y: -8}
-  spawnAreaMax: {x: 22, y: 8}
+  spawnInterval: 0.1
   player: {fileID: 2123462111}
+  playerCombat: {fileID: 2123462119}
+  spawnAreaMin: {x: -23.8, y: -8.8}
+  spawnAreaMax: {x: 23.8, y: 8.8}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  spawnCheckRadius: 0.4
+  maxSpawnAttempts: 20
+  minSpawnDistanceFromPlayer: 4
+  showDebugGizmos: 1
+  showLiveSpawnTests: 1
+  enemiesPerWave: 5
+  timeBetweenSpawns: 0.5
+  timeBetweenWaves: 3
 --- !u!4 &561625634 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5165378324921742225, guid: 00ab316791414f545b88f988e44240dd, type: 3}
@@ -1513,6 +1525,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1043714933}
     m_Modifications:
+    - target: {fileID: 1959543505809925599, guid: 00ab316791414f545b88f988e44240dd, type: 3}
+      propertyPath: health
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 1959543505809925599, guid: 00ab316791414f545b88f988e44240dd, type: 3}
       propertyPath: target
       value: 
@@ -2216,9 +2232,10 @@ GameObject:
   - component: {fileID: 2123462114}
   - component: {fileID: 2123462113}
   - component: {fileID: 2123462112}
-  - component: {fileID: 2123462116}
   - component: {fileID: 2123462119}
   - component: {fileID: 2123462118}
+  - component: {fileID: 2123462116}
+  - component: {fileID: 2123462120}
   - component: {fileID: 2123462117}
   m_Layer: 7
   m_Name: Player
@@ -2284,7 +2301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c58c948dc4284624ba5ba2db29f27e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  startHealth: 1000
+  startHealth: 10000
   healthBarFill: {fileID: 1044196157}
   flashTime: 0.1
   hitColor: {r: 1, g: 0, b: 0, a: 1}
@@ -2453,7 +2470,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6584ece361d98b4099713ed0a808710, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
+  allWeapons:
+  - {fileID: 2123462120}
+  - {fileID: 2123462116}
+  - {fileID: 2123462118}
+  unlockedWeapons: []
   currentWeapon: {fileID: 2123462116}
+--- !u!114 &2123462120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123462110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9de7e82718680d41a343086d18a107e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FullAuto
+  damage: 10
+  attackRate: 10
+  bulletSpeed: 20
+  shootPoint: {fileID: 200480695}
+  bulletPrefab: {fileID: 8320231537342652363, guid: 36a6c52a9fd0def40b1bfc962361fdea, type: 3}
+  spreadAngle: 5
 --- !u!1 &2140849071
 GameObject:
   m_ObjectHideFlags: 0

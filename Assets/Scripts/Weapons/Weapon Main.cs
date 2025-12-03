@@ -7,6 +7,7 @@ public abstract class WeaponMain : MonoBehaviour
     public float attackRate = 1f;
 
     protected float nextAttackTime = 0f;
+    public virtual bool IsFullAuto => false;
     public abstract void Attack();
 }
 

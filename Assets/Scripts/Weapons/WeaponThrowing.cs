@@ -1,4 +1,4 @@
-using UnityEngine;
+ using UnityEngine;
 
 public abstract class WeaponThrowing : WeaponMain
 {
@@ -6,6 +6,5 @@ public abstract class WeaponThrowing : WeaponMain
     [SerializeField] protected float bulletSpeed = 20f;
 
     public Transform shootPoint;
-
 }
 
