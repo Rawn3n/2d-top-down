@@ -1,23 +1,19 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Sten : WeaponThrowing
+public class FullAuto : WeaponThrowing
 {
-    [Header("Sten Settings")]
+    [Header("Bullet Settings")]
     [SerializeField] private GameObject bulletPrefab;
 
-    //private void Update()
-    //{
-    //    if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
-    //    {
-    //        Attack();
-    //    }
-    //}
+    [Header("Spread Settings")]
+    [SerializeField] private float spreadAngle = 5f;
+
+    public override bool IsFullAuto => true;
 
     public override void Attack()
     {
         if (Time.time < nextAttackTime) return;
-
         nextAttackTime = Time.time + (1f / attackRate);
 
         if (Camera.main == null || shootPoint == null || bulletPrefab == null)
@@ -25,20 +21,18 @@ public class Sten : WeaponThrowing
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
         mousePos.z = 0f;
-
         Vector2 direction = (mousePos - shootPoint.position).normalized;
 
-        Vector3 spawnPos = shootPoint.position + (Vector3)(direction * 0.5f);
-        GameObject bulletObj = Instantiate(bulletPrefab, spawnPos, Quaternion.identity);
+        float angleOffset = Random.Range(-spreadAngle, spreadAngle);
+        float currentAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + angleOffset;
+        Vector2 spreadDirection = new Vector2(Mathf.Cos(currentAngle * Mathf.Deg2Rad), Mathf.Sin(currentAngle * Mathf.Deg2Rad)).normalized;
 
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bulletObj.transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
+        Vector3 spawnPos = shootPoint.position + (Vector3)(spreadDirection * 0.5f);
+        GameObject bulletObj = Instantiate(bulletPrefab, spawnPos, Quaternion.Euler(0f, 0f, currentAngle - 90f));
 
         Rigidbody2D rb = bulletObj.GetComponent<Rigidbody2D>();
         if (rb != null)
-        {
-            rb.linearVelocity = direction * bulletSpeed;
-        }
+            rb.linearVelocity = spreadDirection * bulletSpeed;
 
         bullet bulletScript = bulletObj.GetComponent<bullet>();
         if (bulletScript != null)
