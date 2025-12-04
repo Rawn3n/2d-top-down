@@ -79,11 +79,11 @@ public class EnemySpawner : MonoBehaviour
     {
         if (playerCombat == null) return;
 
-        if (currentWave == 10 && playerCombat.allWeapons.Count > 1)
+        if (currentWave == 5 && playerCombat.allWeapons.Count > 1)
         {
             playerCombat.UnlockWeapon(playerCombat.allWeapons[1]);
         }
-        else if (currentWave == 20 && playerCombat.allWeapons.Count > 2)
+        else if (currentWave == 10 && playerCombat.allWeapons.Count > 2)
         {
             playerCombat.UnlockWeapon(playerCombat.allWeapons[2]);
         }

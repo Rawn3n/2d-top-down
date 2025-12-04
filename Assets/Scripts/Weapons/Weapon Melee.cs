@@ -18,7 +18,6 @@ public abstract class WeaponMelee : WeaponMain
 
         foreach (Collider2D enemy in hits)
         {
-            Debug.Log("Hit: " + enemy.name);
             enemy.GetComponent<EnemyMain>()?.TakeDamage(damage);
         }
     }

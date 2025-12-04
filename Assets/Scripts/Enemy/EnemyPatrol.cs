@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EnemyPatrol : EnemyMain
@@ -97,11 +98,9 @@ public class EnemyPatrol : EnemyMain
 
         Vector2 start = (Vector2)transform.position + direction.normalized * 0.2f;
 
-        // Debug rays
         Debug.DrawRay(start, direction.normalized * viewRange, Color.cyan);
         Debug.DrawLine(start, target.position, Color.green);
 
-        // Raycast only against Player layer
         RaycastHit2D hit = Physics2D.Raycast(start, direction.normalized, viewRange, playerLayer);
         if (hit.collider != null && hit.collider.transform == target)
         {
@@ -137,7 +136,6 @@ public class EnemyPatrol : EnemyMain
         if (dist < attackRange)
         {
             rb.linearVelocity = Vector2.zero;
-            //Debug.Log("Close enough to attack!");
             currentState = State.Attacking;
         }
     }
@@ -165,12 +163,10 @@ public class EnemyPatrol : EnemyMain
             currentState = State.Patrolling;
             return;
         }
-        //Debug.Log("Enemy attempts to shoot!");
 
         Vector2 direction = (target.position - firePoint.position).normalized;
 
         GameObject b = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        //Debug.Log("Bullet spawned: " + b);
 
         bullet bulletScript = b.GetComponent<bullet>();
         if (bulletScript != null)
@@ -194,9 +190,9 @@ public class EnemyPatrol : EnemyMain
 
     protected override void Die()
     {
-        //Debug.Log("Enemy dying...");
         rb.linearVelocity = Vector2.zero;
         currentState = State.Dead;
         Destroy(gameObject, 0f);
+        SceneManager.LoadScene("WinScene"); // ændre den her til et andet script senere!!!
     }
 }

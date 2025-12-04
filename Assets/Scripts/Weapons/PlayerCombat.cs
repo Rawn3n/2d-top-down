@@ -58,6 +58,7 @@ public class PlayerCombat : MonoBehaviour
             if (currentWeaponIndex >= unlockedWeapons.Count) currentWeaponIndex = 0;
             currentWeapon = unlockedWeapons[currentWeaponIndex];
         }
+
     }
 
     public void UnlockWeapon(WeaponMain newWeapon)
@@ -69,4 +70,5 @@ public class PlayerCombat : MonoBehaviour
             currentWeaponIndex = unlockedWeapons.Count - 1;
         }
     }
+
 }
